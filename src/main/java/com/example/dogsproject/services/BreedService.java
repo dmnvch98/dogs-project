@@ -63,7 +63,9 @@ public class BreedService {
     }
 
     public Breed getBreedByIdOrThrow(Long id) {
-        return breedRepository.findById(id).orElseThrow(() -> new AppException(HttpStatus.NOT_FOUND, "Breed not found"));
+        return breedRepository
+            .findById(id)
+            .orElseThrow(() -> new AppException(HttpStatus.NOT_FOUND, "Breed not found"));
     }
 
 }

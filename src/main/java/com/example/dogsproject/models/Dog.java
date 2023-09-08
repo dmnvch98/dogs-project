@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -30,7 +31,7 @@ public class Dog {
     @JoinColumn(name = "breed_id")
     private Breed breed;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfBirth ;
+    private LocalDate dateOfBirth ;
     private int weight;
     private int height;
 }
