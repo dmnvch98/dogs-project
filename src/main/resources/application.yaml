@@ -4,11 +4,11 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-
-
   jpa:
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
+remote:
+  breed_url: https://dog.ceo/api/breeds/list/all

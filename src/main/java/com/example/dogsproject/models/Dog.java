@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "dogs")
@@ -20,7 +19,11 @@ public class Dog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "dog_table_generator")
-    @TableGenerator(name = "dog_table_generator", table = "dog_sequence", pkColumnName = "sequence_name", valueColumnName = "next_val")
+    @TableGenerator(
+        name = "dog_table_generator",
+        table = "hibernate_sequences",
+        pkColumnName = "sequence_name",
+        valueColumnName = "next_val")
     private Long id;
     @Column(nullable = false)
     private String name;
@@ -32,6 +35,6 @@ public class Dog {
     private Breed breed;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth ;
-    private int weight;
-    private int height;
+    private Integer weight;
+    private Integer height;
 }

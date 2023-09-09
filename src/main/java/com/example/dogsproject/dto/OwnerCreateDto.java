@@ -8,19 +8,18 @@ import lombok.NoArgsConstructor;
 import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
 @Jacksonized
 @AllArgsConstructor
 @NoArgsConstructor
-public class DogDto {
+public class OwnerCreateDto {
     private Long id;
     private String name;
-    private Long ownerId;
-    private Long breedId;
+    private String phone;
+    private List<DogDto> dogs;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth ;
-    private Integer weight;
-    private Integer height;
+    private LocalDate dateOfBirth;
 }

@@ -10,6 +10,7 @@ import com.example.dogsproject.repositories.BreedRepository;
 import jakarta.annotation.PostConstruct;
 import kong.unirest.GenericType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class BreedService {
     private final ApiSender apiSender;
     private final BreedRepository breedRepository;
 
+    @Value("${remote.breed_url}")
+    public String GET_BREEDS_URL;
+
     @PostConstruct
     private void fetchBreedsFromRemoteRepositoryAndSave() {
         BreedDto breedDto = getBreedsFromRemoteRepository();
@@ -36,7 +40,7 @@ public class BreedService {
     protected BreedDto getBreedsFromRemoteRepository() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", "/");
-        return apiSender.get("https://dog.ceo/api/breeds/list/all", headers, new GenericType<>() {
+        return apiSender.get(GET_BREEDS_URL, headers, new GenericType<>() {
         });
     }
 
@@ -65,7 +69,7 @@ public class BreedService {
     public Breed getBreedByIdOrThrow(Long id) {
         return breedRepository
             .findById(id)
-            .orElseThrow(() -> new AppException(HttpStatus.NOT_FOUND, "Breed not found"));
+            .orElseThrow(() -> new AppException( "Breed not found. Breed id: " + id, HttpStatus.NOT_FOUND));
     }
 
 }
