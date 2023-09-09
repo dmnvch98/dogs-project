@@ -6,6 +6,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class OwnerRepositoryCriteria extends OwnerRepository {
 
     @Override
+    @Transactional
     public Owner findById(Long id) throws EmptyResultDataAccessException {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Owner> criteriaQuery = criteriaBuilder.createQuery(Owner.class);
@@ -24,6 +26,7 @@ public class OwnerRepositoryCriteria extends OwnerRepository {
     }
 
     @Override
+    @Transactional
     public List<Owner> findAll() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Owner> criteriaQuery = criteriaBuilder.createQuery(Owner.class);
