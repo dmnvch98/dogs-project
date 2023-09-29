@@ -28,7 +28,9 @@ public class OwnerService {
     public Owner save(OwnerCreateDto dto) {
         Owner owner = ownerConverter.createDtoToOwner(dto);
 
-        owner.getDogs().forEach(dog -> dog.setOwner(owner));
+        if (owner.getDogs() != null && !owner.getDogs().isEmpty()) {
+            owner.getDogs().forEach(dog -> dog.setOwner(owner));
+        }
         return ownerRepository.save(owner);
     }
 
