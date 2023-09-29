@@ -31,19 +31,20 @@ public abstract class OwnerConverter {
     @Named("extractDogIdsFromDogsList")
     protected List<Long> extractDogIdsFromDogsList(List<Dog> dogsList) {
         return dogsList != null && !dogsList.isEmpty()
-            ? dogsList
-            .stream()
-            .map(Dog::getId)
-            .toList()
-            : null;
+                ? dogsList
+                .stream()
+                .map(Dog::getId)
+                .toList()
+                : null;
     }
 
     @Named("mapDogsDtoToDogs")
-    protected List<Dog> mapDogsDtoToDogs(List<DogDto> initialDogsList) {
-        return initialDogsList
+    protected List<Dog> mapDogsDtoToDogs(List<DogDto> dogsList) {
+        return dogsList != null && !dogsList.isEmpty() ? dogsList
                 .stream()
                 .map(dogConverter::mapDtoToDog)
-                .toList();
+                .toList()
+                : null;
     }
 
 }
