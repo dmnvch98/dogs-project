@@ -17,7 +17,8 @@ public abstract class OwnerRepository {
 
     @Transactional
     public Owner save(Owner owner) {
-        return entityManager.merge(owner);
+        entityManager.persist(owner);
+        return owner;
     }
 
     @Transactional

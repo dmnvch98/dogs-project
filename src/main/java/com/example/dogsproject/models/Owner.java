@@ -28,7 +28,7 @@ public class Owner {
     @Column(nullable = false)
     private String phone;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Dog> dogs;
     private LocalDate dateOfBirth;
 

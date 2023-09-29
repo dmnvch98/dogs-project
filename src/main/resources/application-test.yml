@@ -9,6 +9,7 @@ spring:
       ddl-auto: create-drop
     properties:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
-
+  main:
+    allow-circular-references: true
 remote:
   breed_url: https://dog.ceo/api/breeds/list/all
