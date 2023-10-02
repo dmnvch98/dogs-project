@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.springframework.transaction: debug
+    org.springframework.orm.jpa: debug
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
@@ -11,6 +15,7 @@ spring:
       hibernate.dialect: org.hibernate.dialect.H2Dialect
   main:
     allow-circular-references: true
+
 
 remote:
   breed_url: https://dog.ceo/api/breeds/list/all
