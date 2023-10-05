@@ -20,6 +20,7 @@ public abstract class DogConverter {
 
     @Autowired
     private OwnerService ownerService;
+    private OwnerConverter ownerConverter;
 
     @Mapping(source = "breedId", target = "breed", qualifiedByName = "getBreedById")
     @Mapping(source = "ownerId", target = "owner", qualifiedByName = "getOwnerById")
@@ -53,7 +54,7 @@ public abstract class DogConverter {
     @Named("getOwnerById")
     protected Owner getOwnerById(Long id) {
         return id != null
-            ? ownerService.findById(id)
+            ? ownerService.findOwnerById(id)
             : null;
     }
 }

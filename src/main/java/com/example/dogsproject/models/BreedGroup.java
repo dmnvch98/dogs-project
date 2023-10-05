@@ -2,6 +2,7 @@ package com.example.dogsproject.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BreedGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

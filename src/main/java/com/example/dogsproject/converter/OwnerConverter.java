@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper
 @Component
@@ -31,7 +32,7 @@ public abstract class OwnerConverter {
                 ? dogsList
                 .stream()
                 .map(Dog::getId)
-                .toList()
+                .collect(Collectors.toList())
                 : null;
     }
 
@@ -40,7 +41,7 @@ public abstract class OwnerConverter {
         return dogsList != null && !dogsList.isEmpty() ? dogsList
                 .stream()
                 .map(dogConverter::mapDtoToDog)
-                .toList()
+                .collect(Collectors.toList())
                 : null;
     }
 

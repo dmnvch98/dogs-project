@@ -1,42 +1,43 @@
 package com.example.dogsproject.services;
 
 import com.example.dogsproject.converter.DogConverter;
+import com.example.dogsproject.dto.DogDto;
 import com.example.dogsproject.exceptions.AppException;
 import com.example.dogsproject.models.Dog;
-import com.example.dogsproject.models.Owner;
 import com.example.dogsproject.repositories.DogRepository;
-import com.example.dogsproject.repositories.owner.OwnerRepositoryHQL;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DogService {
     private final DogRepository dogRepository;
-    private final OwnerRepositoryHQL ownerRepository;
     private final DogConverter dogConverter;
+    private final EntityManager entityManager;
+    private final CacheStatisticsService cacheStatisticsService;
 
-    public Dog save(Dog dog) {
-        Dog savedDog = dogRepository.save(dog);
+    public DogDto save(DogDto dogDto) {
+        Dog dog = dogConverter.mapDtoToDog(dogDto);
 
-        Owner dogOwner = savedDog.getOwner();
-        List<Dog> ownerDogs = dogOwner.getDogs();
-        ownerDogs.add(savedDog);
-        ownerRepository.save(dogOwner);
-        return savedDog;
+//        entityManager.clear();
+        return dogConverter.dogToDto(dogRepository.save(dog));
     }
 
-    public Dog findById(Long dogId) {
-        return dogRepository
+    public DogDto findById(Long dogId) {
+        Dog dog = dogRepository
             .findById(dogId)
             .orElseThrow(() -> new AppException("Dog not found. Dog id: " + dogId, HttpStatus.NOT_FOUND));
+        return dogConverter.dogToDto(dog);
     }
 
-    public List<Dog> findAll() {
-        return (List<Dog>) dogRepository.findAll();
+    public List<DogDto> findAll() {
+        List<Dog> dogs = (List<Dog>) dogRepository.findAll();
+        return dogs.stream().map(dogConverter::dogToDto).collect(Collectors.toList());
     }
 
     public void delete(Long dogId) {
@@ -45,5 +46,4 @@ public class DogService {
             .orElseThrow(() -> new AppException("Dog not found. Dog id: " + dogId, HttpStatus.NOT_FOUND));
         dogRepository.delete(dog);
     }
-
 }

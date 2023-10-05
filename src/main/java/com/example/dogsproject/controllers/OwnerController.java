@@ -22,35 +22,27 @@ public class OwnerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OwnerResponseDto createOwner(@RequestBody OwnerCreateDto dto) {
-        Owner savedOwner = ownerService.save(dto);
-        return ownerConverter.ownerToResponseDto(savedOwner);
+        return ownerService.save(dto);
     }
 
     @GetMapping("/{id}")
     public OwnerResponseDto getOwnerById(@PathVariable Long id) {
-        Owner owner = ownerService.findById(id);
-        return ownerConverter.ownerToResponseDto(owner);
+        return ownerService.findById(id);
     }
 
     @GetMapping
     public List<OwnerResponseDto> getAllOwners() {
-        List<Owner> ownersList = ownerService.findAll();
-        return ownersList
-            .stream()
-            .map(ownerConverter::ownerToResponseDto)
-            .collect(Collectors.toList());
+        return ownerService.findAll();
     }
 
     @PutMapping("/{id}")
     public OwnerResponseDto updateOwner(@PathVariable Long id, @RequestBody OwnerCreateDto dto) {
-        Owner updatedOwner = ownerService.update(dto, id);
-        return ownerConverter.ownerToResponseDto(updatedOwner);
+        return ownerService.update(dto, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{ownerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteOwner(@PathVariable Long id) {
-        Owner owner = ownerService.findById(id);
-        ownerService.delete(owner);
+    public void delete(@PathVariable Long ownerId) {
+        ownerService.delete(ownerId);
     }
 }

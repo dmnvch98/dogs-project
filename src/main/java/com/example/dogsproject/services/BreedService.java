@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,12 +40,11 @@ public class BreedService {
         List<BreedGroup> breedGroupList = parseBreedGroupsFromBreedDto(breedDto);
 
         log.info("Breeds were fetched and parsed. The breedGroupList size is {}", breedGroupList.size());
-
         saveAll(breedGroupList);
     }
 
     @Transactional
-    private void saveAll(List<BreedGroup> breedGroupList) {
+    void saveAll(List<BreedGroup> breedGroupList) {
         breedGroupRepository.saveAll(breedGroupList);
     }
 
@@ -70,11 +70,11 @@ public class BreedService {
                         breed.setBreedGroup(breedGroup);
                         return breed;
                     })
-                    .toList()
+                    .collect(Collectors.toList())
                 );
                 return breedGroup;
             })
-            .toList();
+            .collect(Collectors.toList());
     }
 
     public Breed getBreedByIdOrThrow(Long id) {

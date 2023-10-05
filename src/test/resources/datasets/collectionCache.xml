@@ -1,0 +1,7 @@
+<dataset>
+    <owners id="1" name="John Doe" phone="1234567890" date_of_birth="1990-01-01"/>
+    <owners id="2" name="Jane Smith" phone="9876543210" date_of_birth="1985-03-15"/>
+
+    <dogs id="1" name="Dog1" owner_id="1" breed_id="1" date_of_birth="2020-01-01" weight="10" height="30"/>
+    <dogs id="2" name="Dog2" owner_id="2" breed_id="2" date_of_birth="2019-05-15" weight="15" height="35"/>
+</dataset>
