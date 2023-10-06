@@ -2,16 +2,17 @@ package com.example.dogsproject.listeners;
 
 import com.example.dogsproject.services.BreedService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 @RequiredArgsConstructor
-public class ApplicationStartupListener {
+public class ContextRefreshedListener implements ApplicationListener<ContextRefreshedEvent> {
     private final BreedService breedService;
-    @EventListener(ApplicationReadyEvent.class)
-    public void onApplicationReadyEvent() {
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
         breedService.fetchBreedsFromRemoteRepositoryAndSave();
     }
 }
