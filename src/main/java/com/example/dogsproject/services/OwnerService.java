@@ -21,7 +21,7 @@ public class OwnerService {
     private final OwnerConverter ownerConverter;
 
     @Autowired
-    public OwnerService(@Qualifier("ownerRepositoryHQL") OwnerRepository ownerRepository, OwnerConverter ownerConverter) {
+    public OwnerService(@Qualifier("ownerRepositoryCriteria") OwnerRepository ownerRepository, OwnerConverter ownerConverter) {
         this.ownerRepository = ownerRepository;
         this.ownerConverter = ownerConverter;
     }

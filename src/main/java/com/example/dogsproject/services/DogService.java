@@ -5,7 +5,6 @@ import com.example.dogsproject.dto.DogDto;
 import com.example.dogsproject.exceptions.AppException;
 import com.example.dogsproject.models.Dog;
 import com.example.dogsproject.repositories.DogRepository;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,13 +17,10 @@ import java.util.stream.Collectors;
 public class DogService {
     private final DogRepository dogRepository;
     private final DogConverter dogConverter;
-    private final EntityManager entityManager;
-    private final CacheStatisticsService cacheStatisticsService;
 
     public DogDto save(DogDto dogDto) {
         Dog dog = dogConverter.mapDtoToDog(dogDto);
 
-//        entityManager.clear();
         return dogConverter.dogToDto(dogRepository.save(dog));
     }
 

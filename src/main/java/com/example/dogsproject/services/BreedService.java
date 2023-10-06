@@ -32,8 +32,7 @@ public class BreedService {
     @Value("${remote.breed_url}")
     public String GET_BREEDS_URL;
 
-    @PostConstruct
-    private void fetchBreedsFromRemoteRepositoryAndSave() {
+    public void fetchBreedsFromRemoteRepositoryAndSave() {
         log.info("Getting breeds from remote repository");
         BreedDto breedDto = getBreedsFromRemoteRepository();
 

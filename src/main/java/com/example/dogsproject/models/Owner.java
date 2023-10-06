@@ -19,7 +19,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "owner")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "owners")
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "owner_sequence")

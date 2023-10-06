@@ -16,9 +16,9 @@ spring:
           use_second_level_cache: true
           region:
             factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+          use_query_cache: true
         hbm2ddl:
           auto: create-drop
-#        format_sql: true
     show-sql: true
 
   main:
