@@ -1,0 +1,23 @@
+server:
+  port: 5000
+spring:
+  datasource:
+    url:
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        cache:
+          use_second_level_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+          use_query_cache: true
+  main:
+    allow-circular-references: true
+remote:
+  breed_url: https://dog.ceo/api/breeds/list/all
