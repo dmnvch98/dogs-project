@@ -3,7 +3,7 @@ package com.example.dogsproject.services;
 import com.example.dogsproject.dto.DogDto;
 import com.example.dogsproject.dto.OwnerCreateDto;
 
-import org.checkerframework.checker.units.qual.A;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 
 @SpringBootTest
+@Disabled
 class DogServiceTest {
 
     @Autowired

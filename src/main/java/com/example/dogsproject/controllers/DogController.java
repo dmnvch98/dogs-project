@@ -1,7 +1,6 @@
 package com.example.dogsproject.controllers;
 
 import com.example.dogsproject.dto.DogDto;
-import com.example.dogsproject.models.Dog;
 import com.example.dogsproject.services.DogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/dogs")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DogController {
     private final DogService dogService;
 

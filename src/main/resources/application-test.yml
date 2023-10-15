@@ -1,3 +1,8 @@
+logging:
+  level:
+    #    org.springframework.transaction: debug
+    #    org.springframework.orm.jpa: debug
+    org.hibernate.cache: DEBUG
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
@@ -5,16 +10,19 @@ spring:
     username: sa
     password: password
   jpa:
-    hibernate:
-      ddl-auto: create-drop
     properties:
-      hibernate.dialect: org.hibernate.dialect.H2Dialect
-      hibernate.cache.use_second_level_cache: true
-      hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
       hibernate:
         cache:
+          use_second_level_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
           use_query_cache: true
+        hbm2ddl:
+          auto: create-drop
+    show-sql: true
+
   main:
     allow-circular-references: true
+
 remote:
   breed_url: https://dog.ceo/api/breeds/list/all

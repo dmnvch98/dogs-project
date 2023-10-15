@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/owners")
 @RequiredArgsConstructor
+@CrossOrigin
 public class OwnerController {
     private final OwnerService ownerService;
     private final OwnerConverter ownerConverter;
