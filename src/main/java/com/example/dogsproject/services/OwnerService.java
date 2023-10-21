@@ -4,6 +4,7 @@ import com.example.dogsproject.converter.OwnerConverter;
 import com.example.dogsproject.dto.OwnerCreateDto;
 import com.example.dogsproject.dto.OwnerResponseDto;
 import com.example.dogsproject.exceptions.AppException;
+import com.example.dogsproject.models.Dog;
 import com.example.dogsproject.models.Owner;
 import com.example.dogsproject.repositories.owner.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +20,32 @@ import java.util.stream.Collectors;
 public class OwnerService {
     private final OwnerRepository ownerRepository;
     private final OwnerConverter ownerConverter;
+    private final DogService dogService;
 
     @Autowired
-    public OwnerService(@Qualifier("ownerRepositoryCriteria") OwnerRepository ownerRepository, OwnerConverter ownerConverter) {
+    public OwnerService(@Qualifier("ownerRepositoryCriteria") OwnerRepository ownerRepository, OwnerConverter ownerConverter, DogService dogService) {
         this.ownerRepository = ownerRepository;
         this.ownerConverter = ownerConverter;
+        this.dogService = dogService;
     }
 
     public OwnerResponseDto save(OwnerCreateDto dto) {
-        Owner owner = ownerConverter.createDtoToOwner(dto);
+        List<Dog> dogsList = dogService.mapDogsDtoToDogs(dto.getDogs());
+        Owner owner = ownerConverter.createDtoToOwner(dto, dogsList);
 
-        if (owner.getDogs() != null && !owner.getDogs().isEmpty()) {
-            owner.getDogs().forEach(dog -> dog.setOwner(owner));
-        }
-        return ownerConverter.ownerToResponseDto(ownerRepository.save(owner));
+        attachDogsToOwner(owner);
+
+        Owner savedOwner = ownerRepository.save(owner);
+        List<Long> dogIds = dogService.extractDogIdsFromDogsList(savedOwner.getDogs());
+
+        return ownerConverter.ownerToResponseDto(savedOwner, dogIds);
     }
 
     public OwnerResponseDto findById(Long id) {
-        return ownerConverter.ownerToResponseDto(findOwnerById(id));
+        Owner foundOwner = findOwnerById(id);
+        List<Long> dogIds = dogService.extractDogIdsFromDogsList(foundOwner.getDogs());
+
+        return ownerConverter.ownerToResponseDto(foundOwner, dogIds);
     }
 
     public Owner findOwnerById(Long id) {
@@ -51,14 +60,22 @@ public class OwnerService {
         return ownerRepository
             .findAll()
             .stream()
-            .map(ownerConverter::ownerToResponseDto)
+            .map(owner -> {
+                List<Long> dogIds = dogService.extractDogIdsFromDogsList(owner.getDogs());
+                return ownerConverter.ownerToResponseDto(owner, dogIds);
+            })
             .collect(Collectors.toList());
     }
 
     public OwnerResponseDto update(OwnerCreateDto dto, Long id) {
-        Owner owner = ownerConverter.createDtoToOwner(dto);
+        List<Dog> dogsList = dogService.mapDogsDtoToDogs(dto.getDogs());
+        Owner owner = ownerConverter.createDtoToOwner(dto, dogsList);
         owner.setId(id);
-        return ownerConverter.ownerToResponseDto(ownerRepository.save(owner));
+
+        Owner savedOwner = ownerRepository.save(owner);
+        List<Long> dogIds = dogService.extractDogIdsFromDogsList(savedOwner.getDogs());
+
+        return ownerConverter.ownerToResponseDto(savedOwner, dogIds);
     }
 
     public void delete(Long ownerId) {
@@ -67,6 +84,12 @@ public class OwnerService {
             ownerRepository.delete(owner);
         } else {
             throw new AppException("Owner not found. Owner id: " + ownerId, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    private void attachDogsToOwner(Owner owner) {
+        if (owner.getDogs() != null && !owner.getDogs().isEmpty()) {
+            owner.getDogs().forEach(dog -> dog.setOwner(owner));
         }
     }
 
