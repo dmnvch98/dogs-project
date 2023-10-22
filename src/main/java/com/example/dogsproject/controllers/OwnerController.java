@@ -2,7 +2,7 @@ package com.example.dogsproject.controllers;
 
 import com.example.dogsproject.dto.OwnerCreateDto;
 import com.example.dogsproject.dto.OwnerResponseDto;
-import com.example.dogsproject.services.OwnerServiceImpl;
+import com.example.dogsproject.services.OwnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin
 public class OwnerController {
-    private final OwnerServiceImpl ownerService;
+    private final OwnerService ownerService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

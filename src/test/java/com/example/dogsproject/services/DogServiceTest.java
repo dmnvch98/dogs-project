@@ -17,7 +17,7 @@ import java.time.LocalDate;
 class DogServiceTest {
 
     @Autowired
-    private DogServiceImpl dogService;
+    private DogService dogService;
 
     @Autowired
     private CacheManager cacheManager;
