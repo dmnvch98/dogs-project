@@ -10,7 +10,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface DogConverter {
 
-    Dog mapDtoToDog(DogDto dogDto, Breed breed, Owner owner);
+    @Mapping(source = "dogDto.id", target = "id")
+    @Mapping(source = "dogDto.name", target = "name")
+    @Mapping(source = "dogDto.dateOfBirth", target = "dateOfBirth")
+    Dog mapDtoToDog(DogDto dogDto, Owner owner, Breed breed);
 
     @Mapping(source = "owner.id", target = "ownerId")
     @Mapping(source = "breed.id", target = "breedId")

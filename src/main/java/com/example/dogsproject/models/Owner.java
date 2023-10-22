@@ -29,7 +29,7 @@ public class Owner {
     @Column(nullable = false)
     private String phone;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "dogs")
     private List<Dog> dogs;
     private LocalDate dateOfBirth;

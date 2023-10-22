@@ -1,24 +1,20 @@
 package com.example.dogsproject.controllers;
 
-import com.example.dogsproject.converter.OwnerConverter;
 import com.example.dogsproject.dto.OwnerCreateDto;
 import com.example.dogsproject.dto.OwnerResponseDto;
-import com.example.dogsproject.models.Owner;
-import com.example.dogsproject.services.OwnerService;
+import com.example.dogsproject.services.OwnerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/owners")
 @RequiredArgsConstructor
 @CrossOrigin
 public class OwnerController {
-    private final OwnerService ownerService;
-    private final OwnerConverter ownerConverter;
+    private final OwnerServiceImpl ownerService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

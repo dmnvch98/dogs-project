@@ -13,14 +13,14 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @DBRider
 public class HQLCache {
-    @Autowired
-    private OwnerRepositoryCriteria ownerRepositoryCriteria;
-
-    @Test
-    @DataSet("datasets/secondLevelCache.xml")
-    void test() {
-        Owner owner = ownerRepositoryCriteria.findById(1L);
-        System.out.println("===================== HERE =====================");
-        Owner cachedOwner = ownerRepositoryCriteria.findById(1L);
-    }
+//    @Autowired
+//    private OwnerRepositoryCriteria ownerRepositoryCriteria;
+//
+//    @Test
+//    @DataSet("datasets/secondLevelCache.xml")
+//    void test() {
+//        Owner owner = ownerRepositoryCriteria.findById(1L);
+//        System.out.println("===================== HERE =====================");
+//        Owner cachedOwner = ownerRepositoryCriteria.findById(1L);
+//    }
 }

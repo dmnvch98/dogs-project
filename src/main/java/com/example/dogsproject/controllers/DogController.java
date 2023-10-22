@@ -1,7 +1,7 @@
 package com.example.dogsproject.controllers;
 
 import com.example.dogsproject.dto.DogDto;
-import com.example.dogsproject.services.DogService;
+import com.example.dogsproject.services.DogServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin
 public class DogController {
-    private final DogService dogService;
+    private final DogServiceImpl dogService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

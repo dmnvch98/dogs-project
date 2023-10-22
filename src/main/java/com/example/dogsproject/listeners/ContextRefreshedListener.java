@@ -13,6 +13,6 @@ public class ContextRefreshedListener implements ApplicationListener<ContextRefr
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        breedService.fetchBreedsFromRemoteRepositoryAndSave();
+        breedService.fetchBreeds();
     }
 }

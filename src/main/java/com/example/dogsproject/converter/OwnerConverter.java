@@ -15,6 +15,9 @@ public interface OwnerConverter {
     @Mapping(source = "dogs", target = "dogs")
     Owner createDtoToOwner(OwnerCreateDto dto, List<Dog> dogs);
 
+    @Mapping(target = "dogs", source = "dogs", ignore = true)
+    Owner createDtoToOwner(OwnerCreateDto dto);
+
     OwnerResponseDto ownerToResponseDto(Owner owner, List<Long> dogIds);
 
 }

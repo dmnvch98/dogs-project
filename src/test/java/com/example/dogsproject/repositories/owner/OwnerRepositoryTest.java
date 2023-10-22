@@ -22,53 +22,53 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Disabled
 class OwnerRepositoryTest {
 
-    @Autowired
-    private List<OwnerRepository> ownerRepositories;
-
-    @Test
-    void save() {
-        ownerRepositories.forEach(ownerRepository -> {
-            Owner savedOwner = ownerRepository.save(createOwner());
-            Assertions.assertNotNull(savedOwner);
-        });
-    }
-
-    @Test
-    void findById() {
-        ownerRepositories.forEach(ownerRepository -> {
-            Owner savedOwner = ownerRepository.save(createOwner());
-
-            Owner foundOwner = ownerRepository.findById(savedOwner.getId());
-
-            assertEquals(savedOwner, foundOwner);
-        });
-    }
-
-    @Test
-    void findAll() {
-        ownerRepositories.forEach(ownerRepository -> {
-            Owner savedOwner1 = ownerRepository.save(createOwner());
-            Owner savedOwner2 = ownerRepository.save(createOwner());
-
-            List<Owner> foundOwners = ownerRepository.findAll();
-            assertTrue(foundOwners.containsAll(List.of(savedOwner1, savedOwner2)));
-        });
-    }
-
-    private Owner createOwner() {
-        Owner owner = new Owner();
-        owner.setName("OWner");
-        owner.setPhone("12312");
-        owner.setDateOfBirth(LocalDate.of(1998, 9, 11));
-
-        Dog dog = new Dog();
-        dog.setOwner(owner);
-        dog.setName("name dog");
-        dog.setWeight(12);
-        dog.setHeight(123);
-
-        owner.setDogs(List.of(dog));
-        return owner;
-    }
+//    @Autowired
+//    private List<OwnerRepository> ownerRepositories;
+//
+//    @Test
+//    void save() {
+//        ownerRepositories.forEach(ownerRepository -> {
+//            Owner savedOwner = ownerRepository.save(createOwner());
+//            Assertions.assertNotNull(savedOwner);
+//        });
+//    }
+//
+//    @Test
+//    void findById() {
+//        ownerRepositories.forEach(ownerRepository -> {
+//            Owner savedOwner = ownerRepository.save(createOwner());
+//
+//            Owner foundOwner = ownerRepository.findById(savedOwner.getId());
+//
+//            assertEquals(savedOwner, foundOwner);
+//        });
+//    }
+//
+//    @Test
+//    void findAll() {
+//        ownerRepositories.forEach(ownerRepository -> {
+//            Owner savedOwner1 = ownerRepository.save(createOwner());
+//            Owner savedOwner2 = ownerRepository.save(createOwner());
+//
+//            List<Owner> foundOwners = ownerRepository.findAll();
+//            assertTrue(foundOwners.containsAll(List.of(savedOwner1, savedOwner2)));
+//        });
+//    }
+//
+//    private Owner createOwner() {
+//        Owner owner = new Owner();
+//        owner.setName("OWner");
+//        owner.setPhone("12312");
+//        owner.setDateOfBirth(LocalDate.of(1998, 9, 11));
+//
+//        Dog dog = new Dog();
+//        dog.setOwner(owner);
+//        dog.setName("name dog");
+//        dog.setWeight(12);
+//        dog.setHeight(123);
+//
+//        owner.setDogs(List.of(dog));
+//        return owner;
+//    }
 
 }

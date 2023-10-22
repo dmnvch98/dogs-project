@@ -2,12 +2,10 @@ package com.example.dogsproject.services;
 
 import com.example.dogsproject.apisender.ApiSender;
 import com.example.dogsproject.dto.BreedDto;
-import com.example.dogsproject.exceptions.AppException;
 import com.example.dogsproject.models.Breed;
 import com.example.dogsproject.models.BreedGroup;
 import com.example.dogsproject.repositories.BreedGroupRepository;
 import com.example.dogsproject.repositories.BreedRepository;
-import jakarta.annotation.PostConstruct;
 import kong.unirest.GenericType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +31,7 @@ public class BreedService {
     @Value("${remote.breed_url}")
     public String GET_BREEDS_URL;
 
-    public void fetchBreedsFromRemoteRepositoryAndSave() {
+    public void fetchBreeds() {
         log.info("Getting breeds from remote repository");
         BreedDto breedDto = getBreedsFromRemoteRepository();
 
@@ -79,7 +78,7 @@ public class BreedService {
     public Breed getBreedByIdOrThrow(Long id) {
         return breedRepository
             .findById(id)
-            .orElseThrow(() -> new AppException( "Breed not found. Breed id: " + id, HttpStatus.NOT_FOUND));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Breed not found. Breed id: " + id));
     }
 
 }
