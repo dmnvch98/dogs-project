@@ -1,6 +1,5 @@
 package com.example.dogsproject.models;
 
-import com.example.dogsproject.models.abstractClasses.Animal;
 import com.example.dogsproject.models.abstractClasses.Person;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +18,6 @@ import java.util.List;
 public class Owner extends Person {
     @Column(nullable = false)
     private String phone;
-
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "dogs")
     private List<Dog> dogs;
