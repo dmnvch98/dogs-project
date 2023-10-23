@@ -19,6 +19,8 @@ import java.util.List;
 public class OwnerResponseDto {
     private Long id;
     private String name;
+    private String surName;
+
     private String phone;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Long> dogIds;

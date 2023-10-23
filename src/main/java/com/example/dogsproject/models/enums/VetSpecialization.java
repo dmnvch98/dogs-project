@@ -1,4 +1,4 @@
-package com.example.dogsproject.models;
+package com.example.dogsproject.models.enums;
 
 public enum VetSpecialization {
     GENERAL_PRACTICE,

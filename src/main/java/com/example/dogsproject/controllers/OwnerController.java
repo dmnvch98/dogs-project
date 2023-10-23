@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/owners")
 @RequiredArgsConstructor
-@CrossOrigin
 public class OwnerController {
     private final OwnerService ownerService;
 

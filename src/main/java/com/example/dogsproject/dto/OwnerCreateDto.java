@@ -18,6 +18,7 @@ import java.util.List;
 public class OwnerCreateDto {
     private Long id;
     private String name;
+    private String surName;
     private String phone;
     private List<DogDto> dogs;
     @JsonFormat(pattern = "yyyy-MM-dd")
