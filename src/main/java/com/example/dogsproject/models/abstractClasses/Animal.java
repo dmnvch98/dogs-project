@@ -36,11 +36,4 @@ public abstract class Animal {
     private Integer weight;
     private Integer height;
 
-    public Animal(String name, Owner owner, LocalDate dateOfBirth, Integer weight, Integer height) {
-        this.name = name;
-        this.owner = owner;
-        this.dateOfBirth = dateOfBirth;
-        this.weight = weight;
-        this.height = height;
-    }
 }
